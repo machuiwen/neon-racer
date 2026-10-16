@@ -5,7 +5,7 @@
   --gold: #ffd92e;
   --bg: #0a0018;
   --panel: rgba(14, 0, 34, 0.78);
-  --font: "Avenir Next", "Futura", "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  --font: "Avenir Next", "Futura", "Trebuchet MS", "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
   --safe-t: env(safe-area-inset-top, 0px);
   --safe-b: env(safe-area-inset-bottom, 0px);
   --safe-l: env(safe-area-inset-left, 0px);
@@ -185,11 +185,12 @@ button { font-family: inherit; color: inherit; cursor: pointer; touch-action: ma
 
 .table { width: 100%; display: flex; flex-direction: column; gap: 6px; }
 .trow {
-  display: grid; grid-template-columns: 34px 18px 1fr auto; align-items: center; gap: 10px;
+  display: grid; grid-template-columns: auto 18px 1fr auto; align-items: center; gap: 10px;
   padding: 8px 12px; border-radius: 12px; background: rgba(255, 255, 255, 0.06); font-weight: 700; font-size: 17px; text-align: left;
 }
 .trow.me { background: rgba(255, 46, 166, 0.28); box-shadow: 0 0 0 2px rgba(255, 46, 166, 0.6) inset; }
 .trow .dot { width: 16px; height: 16px; border-radius: 50%; box-shadow: 0 0 10px currentColor; }
+.trow > span:first-child { white-space: nowrap; }
 .trow .t { font-variant-numeric: tabular-nums; opacity: 0.85; }
 .stats { font-size: 16px; font-weight: 700; color: #9af3ff; line-height: 1.6; }
 

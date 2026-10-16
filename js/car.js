@@ -3,15 +3,15 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { clamp, wrapAngle } from './util.js';
 
 export const CAR_COLORS = [
-  { name: 'Pink', hex: 0xff2ea6 },
-  { name: 'Aqua', hex: 0x18e0ff },
-  { name: 'Lime', hex: 0x7dff3a },
-  { name: 'Orange', hex: 0xff8a1c },
-  { name: 'Purple', hex: 0x9a4dff },
-  { name: 'Gold', hex: 0xffd92e },
+  { name: '粉色', hex: 0xff2ea6 },
+  { name: '青色', hex: 0x18e0ff },
+  { name: '绿色', hex: 0x7dff3a },
+  { name: '橙色', hex: 0xff8a1c },
+  { name: '紫色', hex: 0x9a4dff },
+  { name: '金色', hex: 0xffd92e },
 ];
 
-export const AI_NAMES = ['Blaze', 'Comet', 'Pixel', 'Zippy', 'Sparkle'];
+export const AI_NAMES = ['火焰', '彗星', '像素', '飞飞', '闪闪'];
 
 let shared = null;
 

@@ -18,9 +18,7 @@ export const store = {
 };
 
 export function ordinal(n) {
-  const s = ['th', 'st', 'nd', 'rd'];
-  const v = n % 100;
-  return s[(v - 20) % 10] || s[v] || s[0];
+  return '名';
 }
 
 export function fmtTime(t) {

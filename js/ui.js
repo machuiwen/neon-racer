@@ -21,13 +21,13 @@ export class Hud {
 
   update(s) {
     const e = this.el;
-    this.set('pos', s.pos, (v) => { e.pos.innerHTML = v + '<sup>' + ordinal(v) + '</sup>'; });
+    this.set('pos', s.pos, (v) => { e.pos.innerHTML = '<sup>第</sup>' + v + '<sup>' + ordinal(v) + '</sup>'; });
     this.set('posOf', s.total, (v) => { e.posOf.textContent = '/' + v; });
-    this.set('lap', s.lap + '/' + s.laps, (v) => { e.lap.textContent = 'LAP ' + v; });
+    this.set('lap', s.lap + '/' + s.laps, (v) => { e.lap.textContent = '圈数 ' + v; });
     this.set('stars', s.stars, (v) => { e.stars.textContent = '★ ' + v; });
     this.set('time', fmtTime(s.time), (v) => { e.time.textContent = v; });
-    this.set('best', fmtTime(s.best), (v) => { e.best.textContent = 'BEST ' + v; });
-    this.set('last', s.last > 0 ? fmtTime(s.last) : '', (v) => { e.last.textContent = v ? 'LAST ' + v : ''; });
+    this.set('best', fmtTime(s.best), (v) => { e.best.textContent = '最快 ' + v; });
+    this.set('last', s.last > 0 ? fmtTime(s.last) : '', (v) => { e.last.textContent = v ? '上圈 ' + v : ''; });
     this.set('speed', s.speed, (v) => { e.speed.textContent = v; });
     this.set('boost', Math.round(s.boost * 100), (v) => {
       e.boost.style.transform = 'scaleX(' + v / 100 + ')';

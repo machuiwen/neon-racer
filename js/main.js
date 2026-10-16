@@ -90,7 +90,7 @@ const AI_P = { ...BASE, assist: 0, wallKeep: 0.85 };
 let PP = { ...BASE, assist: DIFF[settings.diff].assist, wallKeep: DIFF[settings.diff].wallKeep };
 
 // ---------- cars ----------
-const player = new Car(scene, CAR_COLORS[settings.color].hex, 'You', true);
+const player = new Car(scene, CAR_COLORS[settings.color].hex, '你', true);
 const ais = [0, 1, 2].map((k) => new Car(scene, 0xffffff, AI_NAMES[k], false));
 const cars = [player, ...ais];
 function recolorAIs() {
@@ -254,11 +254,11 @@ function onPlayerLap() {
   if (player.lapsDone >= settings.laps) return;
   audio.lapDing();
   const final = player.lapsDone === settings.laps - 1;
-  if (best) hud.toast('New best lap!', 'gold');
+  if (best) hud.toast('新的最快一圈！', 'gold');
   if (final) {
-    if (best) setTimeout(() => { if (G.mode === 'race') hud.toast('Final lap!', 'cyan'); }, 1500);
-    else hud.toast('Final lap!', 'cyan');
-  } else if (!best) hud.toast('Lap ' + (player.lapsDone + 1), 'cyan');
+    if (best) setTimeout(() => { if (G.mode === 'race') hud.toast('最后一圈！', 'cyan'); }, 1500);
+    else hud.toast('最后一圈！', 'cyan');
+  } else if (!best) hud.toast('第 ' + (player.lapsDone + 1) + ' 圈', 'cyan');
 }
 
 function onPlayerFinish() {
@@ -266,7 +266,7 @@ function onPlayerFinish() {
   G.resultsT = 2.4;
   G.flash = 0.6;
   const place = player.finishOrder;
-  hud.toast(place === 1 ? 'You win!' : 'Finish!', 'gold');
+  hud.toast(place === 1 ? '你赢了！' : '到终点啦！', 'gold');
   audio.fanfare(place);
   show(ui.touch, false);
   touch.reset();
@@ -277,8 +277,8 @@ function showResults() {
   show(ui.hud, false);
   show(ui.btnPause, false);
   const place = player.finishOrder;
-  $('res-place').innerHTML = place + '<sup>' + ordinal(place) + '</sup>';
-  const msgs = ['You won! Amazing driving!', 'So close! Great race!', 'Nice job! You made the podium!', 'Good try! Race again?'];
+  $('res-place').innerHTML = '第' + place + '<sup>' + ordinal(place) + '</sup>';
+  const msgs = ['你赢了！开得太棒了！', '就差一点点！比赛真精彩！', '真棒！你登上领奖台了！', '不错的尝试！再来一局？'];
   $('res-msg').textContent = msgs[Math.min(place, 4) - 1];
   const rows = ranking().map((c, i) => {
     let t = c.finishTime;
@@ -287,15 +287,15 @@ function showResults() {
       t = G.raceTime + (settings.laps * N - c.prog) / rate;
     }
     const col = '#' + c.color.getHexString();
-    return '<div class="trow' + (c === player ? ' me' : '') + '"><span>' + (i + 1) + ordinal(i + 1) +
+    return '<div class="trow' + (c === player ? ' me' : '') + '"><span>第' + (i + 1) + ordinal(i + 1) +
       '</span><span class="dot" style="background:' + col + ';color:' + col + '"></span><span>' + c.name +
       '</span><span class="t">' + fmtTime(t) + '</span></div>';
   });
   $('res-table').innerHTML = rows.join('');
   const stats = [
-    'Race time ' + fmtTime(player.finishTime),
-    'Best lap ' + fmtTime(G.raceBest) + (G.newRecord ? ' — new record!' : ''),
-    '★ Stars collected: ' + player.stars,
+    '比赛用时 ' + fmtTime(player.finishTime),
+    '最快一圈 ' + fmtTime(G.raceBest) + (G.newRecord ? ' — 新纪录！' : ''),
+    '★ 收集到的星星：' + player.stars,
   ];
   $('res-stats').innerHTML = stats.join('<br>');
   show(ui.results, true);
@@ -327,7 +327,7 @@ function rescuePlayer() {
   player.prog = prog;
   G.flash = 0.4;
   G.wrongT = 0; G.stuckT = 0;
-  hud.toast('Back on track!', 'cyan');
+  hud.toast('回到赛道啦！', 'cyan');
 }
 
 // ---------- per-frame logic ----------
@@ -489,7 +489,7 @@ function updateCountdown(dt) {
     setGantry(stage);
     if (stage > 0) { hud.countdown(String(stage), false); audio.countBeep(false); }
     if (stage === 0) {
-      hud.countdown('GO!', true);
+      hud.countdown('出发！', true);
       audio.countBeep(true);
       G.mode = 'race';
       G.raceTime = 0;
@@ -669,8 +669,8 @@ function buildTitleUI() {
     e.currentTarget.blur();
   });
   $('help').innerHTML = IS_TOUCH
-    ? 'Tap the arrows to steer. Hold <b>GO</b> to drive (or turn on Auto gas). Tap <b>BOOST</b> for a burst of speed! Slide around corners to fill your boost.'
-    : '<b>Arrow keys</b> or <b>WASD</b> to drive &middot; <b>Space</b> to boost &middot; <b>P</b> to pause &middot; <b>M</b> for sound. Slide around corners to fill your boost!';
+    ? '点箭头转方向。按住<b>油门</b>往前开（也可以打开自动油门）。点<b>加速</b>会冲得飞快！过弯时漂移可以攒加速能量。'
+    : '<b>方向键</b>或 <b>WASD</b> 开车 &middot; <b>空格</b>加速 &middot; <b>P</b> 暂停 &middot; <b>M</b> 声音开关。过弯时漂移可以攒加速能量！';
 }
 
 function updateTitleUI() {
@@ -678,7 +678,7 @@ function updateTitleUI() {
   $('seg-diff').querySelectorAll('button').forEach((b) => b.classList.toggle('on', b.dataset.v === settings.diff));
   $('seg-laps').querySelectorAll('button').forEach((b) => b.classList.toggle('on', parseInt(b.dataset.v, 10) === settings.laps));
   $('btn-autogas').classList.toggle('on', settings.autoGas);
-  $('title-best').textContent = isFinite(G.best) ? 'Your best lap: ' + fmtTime(G.best) : '';
+  $('title-best').textContent = isFinite(G.best) ? '你的最快一圈：' + fmtTime(G.best) : '';
 }
 
 function toggleMute() {
